@@ -1,0 +1,466 @@
+classdef untitled7_App < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        figure1            matlab.ui.Figure
+        equalsign          matlab.ui.control.Label
+        uibuttongroup2     matlab.ui.container.ButtonGroup
+        edge               matlab.ui.control.Button
+        complementimage    matlab.ui.control.Button
+        anticlockwise      matlab.ui.control.Button
+        clockwise          matlab.ui.control.Button
+        addition           matlab.ui.control.Button
+        uibuttongroup1     matlab.ui.container.ButtonGroup
+        SubtractionButton  matlab.ui.control.Button
+        reset              matlab.ui.control.Button
+        rgb2gray           matlab.ui.control.Button
+        binaryimage        matlab.ui.control.Button
+        uploadimage        matlab.ui.control.Button
+        axes3              matlab.ui.control.UIAxes
+        axes2              matlab.ui.control.UIAxes
+        axes1              matlab.ui.control.UIAxes
+    end
+
+    
+    methods (Access = private)
+    end
+
+    % Callbacks that handle component events
+    methods (Access = private)
+
+        % Code that executes after component creation
+        function untitled7_OpeningFcn(app, varargin)
+            % --- Executes just before untitled7 is made visible.
+            
+            % Ensure that the app appears on screen when run
+            movegui(app.figure1, 'onscreen');
+            
+            % Create GUIDE-style callback args - Added by Migration Tool
+            [hObject, eventdata, handles] = convertToGUIDECallbackArguments(app); %#ok<ASGLU>
+            
+            % This function has no output args, see Oapp.SubtractionButtonutputFcn.
+            % hObject    handle to figure
+            % eventdata  reserved - to be defined in a future version of MATLAB
+            % handles    structure with handles and user data (see GUIDATA)
+            % varargin   command line arguments to untitled7 (see VARARGIN)
+            
+            % Choose default command line output for untitled7
+            handles.output = hObject;
+            
+            % Update handles structure
+            guidata(hObject, handles);
+        end
+
+        % Button pushed function: addition
+        function addition_Callback(app, event)
+            % --- Executes on button press in addition.
+            
+            % Create GUIDE-style callback args - Added by Migration Tool
+            [hObject, eventdata, handles] = convertToGUIDECallbackArguments(app, event); %#ok<ASGLU>
+            
+            % hObject    handle to addition (see GCBO)
+            % eventdata  reserved - to be defined in a future version of MATLAB
+            % handles    structure with handles and user data (see GUIDATA)
+            a = getappdata(0,'a');
+            aGray = im2gray(a);
+            
+            b = getappdata(0,'b');
+            bGray = im2gray(b);
+            
+            K = imadd(aGray,bGray);
+            axes(handles.axes3);
+            imshow(K)
+        end
+
+        % Button pushed function: anticlockwise
+        function anticlockwise_Callback(app, event)
+            % --- Executes on button press in anticlockwise.
+            
+            % Create GUIDE-style callback args - Added by Migration Tool
+            [hObject, eventdata, handles] = convertToGUIDECallbackArguments(app, event); %#ok<ASGLU>
+            
+            % hObject    handle to anticlockwise (see GCBO)
+            % eventdata  reserved - to be defined in a future version of MATLAB
+            % handles    structure with handles and user data (see GUIDATA)
+            a=getappdata(0,'a');
+            aclock=a;
+            aclock=imrotate(aclock,90);
+            axes(handles.axes1);
+            imshow(aclock);
+
+            b=getappdata(0,'b');
+            bclock=b;
+            bclock=imrotate(bclock,90);
+            axes(handles.axes2);
+            imshow(bclock);
+        end
+
+        % Button pushed function: binaryimage
+        function binaryimage_Callback(app, event)
+            % --- Executes on button press in binaryimage.
+            
+            % Create GUIDE-style callback args - Added by Migration Tool
+            [hObject, eventdata, handles] = convertToGUIDECallbackArguments(app, event); %#ok<ASGLU>
+            
+            % hObject    handle to binaryimage (see GCBO)
+            % eventdata  reserved - to be defined in a future version of MATLAB
+            % handles    structure with handles and user data (see GUIDATA)
+            a = getappdata(0,'a');
+            abw = im2bw(a);
+            axes(handles.axes1);
+            imshow(abw);
+            
+            b = getappdata(0,'b');
+            bbw = im2bw(b);
+            axes(handles.axes2);
+            imshow(bbw);
+        end
+
+        % Button pushed function: clockwise
+        function clockwise_Callback(app, event)
+            % --- Executes on button press in clockwise.
+            
+            % Create GUIDE-style callback args - Added by Migration Tool
+            [hObject, eventdata, handles] = convertToGUIDECallbackArguments(app, event); %#ok<ASGLU>
+            
+            % hObject    handle to clockwise (see GCBO)
+            % eventdata  reserved - to be defined in a future version of MATLAB
+            % handles    structure with handles and user data (see GUIDATA)
+            a = getappdata(0,'a');
+            aclock = a;
+            aclock = imrotate(aclock,270);
+            axes(handles.axes1);
+            imshow(aclock);
+            
+            b = getappdata(0,'b');
+            bclock = b;
+            bclock = imrotate(bclock,270);
+            axes(handles.axes2);
+            imshow(bclock);
+        end
+
+        % Button pushed function: complementimage
+        function complementimage_Callback(app, event)
+            % --- Executes on button press in complementimage.
+            
+            % Create GUIDE-style callback args - Added by Migration Tool
+            [hObject, eventdata, handles] = convertToGUIDECallbackArguments(app, event); %#ok<ASGLU>
+            
+            % hObject    handle to complementimage (see GCBO)
+            % eventdata  reserved - to be defined in a future version of MATLAB
+            % handles    structure with handles and user data (see GUIDATA)
+            a=getappdata(0,'a');
+            acomp=a;
+            acomp=imcomplement(acomp);
+            axes(handles.axes1);
+            imshow(acomp);
+            
+            b = getappdata(0,'b');
+            bcomp=b;
+            bcomp=imcomplement(bcomp);
+            axes(handles.axes2);
+            imshow(bcomp);
+        end
+
+        % Button pushed function: edge
+        function edge_Callback(app, event)
+            % --- Executes on button press in edge.
+            
+            % Create GUIDE-style callback args - Added by Migration Tool
+            [hObject, eventdata, handles] = convertToGUIDECallbackArguments(app, event); %#ok<ASGLU>
+            
+            % hObject    handle to edge (see GCBO)
+            % eventdata  reserved - to be defined in a future version of MATLAB
+            % handles    structure with handles and user data (see GUIDATA)
+            a = getappdata(0,'a');
+            aedge = a;
+            aedge = im2gray(aedge);
+            aedge = edge(aedge,'Prewitt');            
+            axes(handles.axes1);
+            imshow(aedge);
+            
+            b = getappdata(0,'b');
+            bedge = b;
+            bedge = im2gray(bedge);
+            bedge = edge(bedge,'Prewitt');
+            axes(handles.axes2);
+            imshow(bedge);
+        end
+
+        % Button pushed function: reset
+        function reset_Callback(app, event)
+            % --- Executes on button press in reset.
+            
+            % Create GUIDE-style callback args - Added by Migration Tool
+            [hObject, eventdata, handles] = convertToGUIDECallbackArguments(app, event); %#ok<ASGLU>
+            
+            % hObject    handle to reset (see GCBO)
+            % eventdata  reserved - to be defined in a future version of MATLAB
+            % handles    structure with handles and user data (see GUIDATA)
+            a=getappdata(0,'a');
+            axes(handles.axes1);
+            imshow(a);
+            
+            b = getappdata(0,'b');
+            axes(handles.axes2);
+            imshow(b);
+            
+        end
+
+        % Button pushed function: rgb2gray
+        function rgb2gray_Callback(app, event)
+            % --- Executes on button press in rgb2gray.
+            
+            % Create GUIDE-style callback args - Added by Migration Tool
+            [hObject, eventdata, handles] = convertToGUIDECallbackArguments(app, event); %#ok<ASGLU>
+            
+            % hObject    handle to rgb2gray (see GCBO)
+            % eventdata  reserved - to be defined in a future version of MATLAB
+            % handles    structure with handles and user data (see GUIDATA)
+            a = getappdata(0,'a');
+            agray = im2gray(a);
+            axes(handles.axes1);
+            imshow(agray);
+
+            b = getappdata(0,'b');
+            bgray = im2gray(b);
+            axes(handles.axes2);
+            imshow(bgray); 
+
+            
+                       
+        end
+
+        % Button pushed function: uploadimage
+        function uploadimage_Callback(app, event)
+            % --- Executes on button press in uploadimage.
+            
+            % Create GUIDE-style callback args - Added by Migration Tool
+            [hObject, eventdata, handles] = convertToGUIDECallbackArguments(app, event); %#ok<ASGLU>
+            
+            % hObject    handle to uploadimage (see GCBO)
+            % eventdata  reserved - to be defined in a future version of MATLAB
+            % handles    structure with handles and user data (see GUIDATA)
+            a = uigetfile('.jpg');
+            a = imread(a);
+            axes(handles.axes1);
+            imshow(a);
+            setappdata(0, 'a', a)
+            
+            b = uigetfile('.jpg');
+            b = imread(b); 
+            axes(handles.axes2);
+            imshow(b);
+            setappdata(0, 'b', b)
+        end
+
+        % Button pushed function: SubtractionButton
+        function SubtractionButtonPushed(app, event)
+            % --- Executes on button press in addition.
+            
+            % Create GUIDE-style callback args - Added by Migration Tool
+            [hObject, eventdata, handles] = convertToGUIDECallbackArguments(app, event); %#ok<ASGLU>
+            
+            % hObject    handle to addition (see GCBO)
+            % eventdata  reserved - to be defined in a future version of MATLAB
+            % handles    structure with handles and user data (see GUIDATA)
+            a = getappdata(0,'a');
+            aGray = im2gray(a);
+            
+            b = getappdata(0,'b');
+            bGray = im2gray(b);
+            
+            K = imsubtract(aGray,bGray);
+            axes(handles.axes3);
+            imshow(K);
+            
+        end
+    end
+
+    % Component initialization
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Create figure1 and hide until all components are created
+            app.figure1 = uifigure('Visible', 'off');
+            app.figure1.Position = [680 623 1102 535];
+            app.figure1.Name = 'untitled7';
+            app.figure1.Resize = 'off';
+            app.figure1.HandleVisibility = 'callback';
+            app.figure1.Tag = 'figure1';
+
+            % Create axes1
+            app.axes1 = uiaxes(app.figure1);
+            app.axes1.FontSize = 12;
+            app.axes1.NextPlot = 'replace';
+            app.axes1.Tag = 'axes1';
+            app.axes1.Position = [240 267 237 226];
+
+            % Create axes2
+            app.axes2 = uiaxes(app.figure1);
+            app.axes2.FontSize = 12;
+            app.axes2.NextPlot = 'replace';
+            app.axes2.Tag = 'axes2';
+            app.axes2.Position = [512 267 228 226];
+
+            % Create axes3
+            app.axes3 = uiaxes(app.figure1);
+            app.axes3.FontSize = 12;
+            app.axes3.NextPlot = 'replace';
+            app.axes3.Tag = 'axes3';
+            app.axes3.Position = [791 267 220 226];
+
+            % Create uibuttongroup1
+            app.uibuttongroup1 = uibuttongroup(app.figure1);
+            app.uibuttongroup1.Title = 'Basic Operations ';
+            app.uibuttongroup1.Tag = 'uibuttongroup1';
+            app.uibuttongroup1.FontSize = 10.6666666666667;
+            app.uibuttongroup1.Position = [13 94 201 422];
+
+            % Create uploadimage
+            app.uploadimage = uibutton(app.uibuttongroup1, 'push');
+            app.uploadimage.ButtonPushedFcn = createCallbackFcn(app, @uploadimage_Callback, true);
+            app.uploadimage.Tag = 'uploadimage';
+            app.uploadimage.BackgroundColor = [0 0.447058823529412 0.741176470588235];
+            app.uploadimage.FontSize = 10.6666666666667;
+            app.uploadimage.Position = [28 336 151 51];
+            app.uploadimage.Text = 'Upload Pic';
+
+            % Create binaryimage
+            app.binaryimage = uibutton(app.uibuttongroup1, 'push');
+            app.binaryimage.ButtonPushedFcn = createCallbackFcn(app, @binaryimage_Callback, true);
+            app.binaryimage.Tag = 'binaryimage';
+            app.binaryimage.BackgroundColor = [1 1 1];
+            app.binaryimage.FontSize = 10.6666666666667;
+            app.binaryimage.Position = [29 173 151 49];
+            app.binaryimage.Text = 'Convert to Binary ';
+
+            % Create rgb2gray
+            app.rgb2gray = uibutton(app.uibuttongroup1, 'push');
+            app.rgb2gray.ButtonPushedFcn = createCallbackFcn(app, @rgb2gray_Callback, true);
+            app.rgb2gray.Tag = 'rgb2gray';
+            app.rgb2gray.BackgroundColor = [0.650980392156863 0.650980392156863 0.650980392156863];
+            app.rgb2gray.FontSize = 10.6666666666667;
+            app.rgb2gray.Position = [28 254 152 49];
+            app.rgb2gray.Text = 'Convert Gray Scale';
+
+            % Create reset
+            app.reset = uibutton(app.uibuttongroup1, 'push');
+            app.reset.ButtonPushedFcn = createCallbackFcn(app, @reset_Callback, true);
+            app.reset.Tag = 'reset';
+            app.reset.BackgroundColor = [0.392156862745098 0.831372549019608 0.0745098039215686];
+            app.reset.FontSize = 10.6666666666667;
+            app.reset.Position = [29 102 151 49];
+            app.reset.Text = 'Reset';
+
+            % Create SubtractionButton
+            app.SubtractionButton = uibutton(app.uibuttongroup1, 'push');
+            app.SubtractionButton.ButtonPushedFcn = createCallbackFcn(app, @SubtractionButtonPushed, true);
+            app.SubtractionButton.Tag = 'subtraction';
+            app.SubtractionButton.Position = [28 29 150 42];
+            app.SubtractionButton.Text = 'Subtraction';
+
+            % Create uibuttongroup2
+            app.uibuttongroup2 = uibuttongroup(app.figure1);
+            app.uibuttongroup2.Title = 'Advanced Operations';
+            app.uibuttongroup2.Tag = 'uibuttongroup2';
+            app.uibuttongroup2.FontSize = 10.6666666666667;
+            app.uibuttongroup2.Position = [340 94 571 151];
+
+            % Create addition
+            app.addition = uibutton(app.uibuttongroup2, 'push');
+            app.addition.ButtonPushedFcn = createCallbackFcn(app, @addition_Callback, true);
+            app.addition.Tag = 'addition';
+            app.addition.FontSize = 10.6666666666667;
+            app.addition.Position = [23 90 168 41];
+            app.addition.Text = 'Addition';
+
+            % Create clockwise
+            app.clockwise = uibutton(app.uibuttongroup2, 'push');
+            app.clockwise.ButtonPushedFcn = createCallbackFcn(app, @clockwise_Callback, true);
+            app.clockwise.Tag = 'clockwise';
+            app.clockwise.FontSize = 10.6666666666667;
+            app.clockwise.Position = [382 88 168 41];
+            app.clockwise.Text = 'Rotate Clockwise';
+
+            % Create anticlockwise
+            app.anticlockwise = uibutton(app.uibuttongroup2, 'push');
+            app.anticlockwise.ButtonPushedFcn = createCallbackFcn(app, @anticlockwise_Callback, true);
+            app.anticlockwise.Tag = 'anticlockwise';
+            app.anticlockwise.FontSize = 10.6666666666667;
+            app.anticlockwise.Position = [382 10 168 41];
+            app.anticlockwise.Text = 'Rotate Anticlockwise';
+
+            % Create complementimage
+            app.complementimage = uibutton(app.uibuttongroup2, 'push');
+            app.complementimage.ButtonPushedFcn = createCallbackFcn(app, @complementimage_Callback, true);
+            app.complementimage.Tag = 'complementimage';
+            app.complementimage.FontSize = 10.6666666666667;
+            app.complementimage.Position = [23 10 168 41];
+            app.complementimage.Text = 'Complement Image';
+
+            % Create edge
+            app.edge = uibutton(app.uibuttongroup2, 'push');
+            app.edge.ButtonPushedFcn = createCallbackFcn(app, @edge_Callback, true);
+            app.edge.Tag = 'prewittedge';
+            app.edge.FontSize = 10.6666666666667;
+            app.edge.Position = [202 50 168 41];
+            app.edge.Text = 'Prewitt Edge Detection';
+
+            % Create equalsign
+            app.equalsign = uilabel(app.figure1);
+            app.equalsign.Tag = 'equalsign';
+            app.equalsign.HorizontalAlignment = 'center';
+            app.equalsign.VerticalAlignment = 'top';
+            app.equalsign.WordWrap = 'on';
+            app.equalsign.FontSize = 21.3333333333333;
+            app.equalsign.Position = [750 371 32 26];
+            app.equalsign.Text = '=';
+
+            % Show the figure after all components are created
+            app.figure1.Visible = 'on';
+        end
+    end
+
+    % App creation and deletion
+    methods (Access = public)
+
+        % Construct app
+        function app = untitled7_App(varargin)
+
+            runningApp = getRunningApp(app);
+
+            % Check for running singleton app
+            if isempty(runningApp)
+
+                % Create UIFigure and components
+                createComponents(app)
+
+                % Register the app with App Designer
+                registerApp(app, app.figure1)
+
+                % Execute the startup function
+                runStartupFcn(app, @(app)untitled7_OpeningFcn(app, varargin{:}))
+            else
+
+                % Focus the running singleton app
+                figure(runningApp.figure1)
+
+                app = runningApp;
+            end
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.figure1)
+        end
+    end
+end
